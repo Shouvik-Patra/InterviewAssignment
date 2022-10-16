@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { View, ScrollView, Alert, ActivityIndicator, Text, StyleSheet, FlatList, ImageBackground, TouchableOpacity, SafeAreaView, StatusBar, Image } from "react-native";
 import { Product } from '../Store'
+import BoxEdit from './BoxEdit';
 
-const Products = () => {
+const Products = (dev) => {
 
     const [products, setProducts] = useState();
     const [loading, setLoading] = useState(true);
+    const [editBox, setEditBox] = useState(false);
 
     useEffect(() => {
         Product.getProduct()
@@ -16,7 +18,7 @@ const Products = () => {
             )
             .catch(err => Alert.alert(err.code, err.message))
     })
-    
+
 
     if (loading) {
         return <ActivityIndicator
@@ -38,9 +40,9 @@ const Products = () => {
                         <Image style={styles.card2} source={require('../Icons/unnamed.png')}></Image>
 
 
-                        <Text style={{fontSize:18,color:"#A52A2A",fontWeight:'900'}}> {item.productName}</Text>
-                        <Text style={{fontSize:16,color:"black",fontWeight:'900'}}> Price:{item.price}</Text>
-                        <Text style={{fontSize:16,color:"#A52A2A",fontWeight:'900'}}>Offer Price {item.offerPrice}</Text>
+                        <Text style={{ fontSize: 18, color: "#A52A2A", fontWeight: '900' }}> {item.productName}</Text>
+                        <Text style={{ fontSize: 16, color: "black", fontWeight: '900' }}> Price:{item.price}</Text>
+                        <Text style={{ fontSize: 16, color: "#A52A2A", fontWeight: '900' }}>Offer Price {item.offerPrice}</Text>
 
                         <View style={styles.sub}>
                             <TouchableOpacity
@@ -51,18 +53,20 @@ const Products = () => {
                                     fontWeight: 'bold',
                                     fontSize: 16
                                 }}>Delete</Text>
-                            </TouchableOpacity> 
-                            
+                            </TouchableOpacity>
+
                             <TouchableOpacity
                                 style={styles.submit}
-                               // onPress={() => Auth.signUp(Name, Email, Password)}
+                             onPress={() => setEditBox(true)}
                             >
                                 <Text style={{
                                     fontWeight: 'bold',
                                     fontSize: 16
                                 }}>Edit</Text>
                             </TouchableOpacity>
+                            
                         </View>
+                        {editBox === true && <BoxEdit dev={dev} setEditBox={setEditBox} />}
                     </View>
                 )}
             />
@@ -73,7 +77,7 @@ const Products = () => {
 export default Products;
 
 const styles = StyleSheet.create({
-  
+
     output: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -82,12 +86,12 @@ const styles = StyleSheet.create({
         // backgroundColor: "#fff"
 
     },
-    sub:{
-        width:"100%",
-        flexDirection:"row",
-        margin:5,
-        alignItems:"center",
-        justifyContent:"space-between"
+    sub: {
+        width: "100%",
+        flexDirection: "row",
+        margin: 5,
+        alignItems: "center",
+        justifyContent: "space-between"
     },
     card: {
         padding: 5,
@@ -98,7 +102,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         marginLeft: 5,
         marginRight: 5,
-        marginTop:5
+        marginTop: 5
     },
     card2: {
         width: 250,
@@ -129,8 +133,8 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         justifyContent: "center",
         alignItems: "center",
-        borderColor:"#808080",
-        borderWidth:1
+        borderColor: "#808080",
+        borderWidth: 1
 
         //marginTop: 20,
 

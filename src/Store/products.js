@@ -11,7 +11,6 @@ const addProduct = (productName, image, price, offerPrice) => {
         .doc()
         .set({
             productName,
-            
             price,
             offerPrice
         })
@@ -31,26 +30,42 @@ const getProduct = () => {
         .catch(err => err)
 }
 
+const updateProduct = (updateDoc) => {
+    return firestore()
+        .collection('products')
+        .doc(updateDoc.id)
+        .update(updateDoc)
+        .then(() => {
+            Alert.alert(
+                'Product Updated!',
+                'Your Product has been deleted successfully!',
+            );
+            // setDeleted(true);
+        })
+        .catch((e) => console.log('Error deleting Product.', e));
+}
+
 const deleteProduct = (postId) => {
-    firestore()
-      .collection('products')
-      .doc(postId)
-      .delete()
-      .then(() => {
-        Alert.alert(
-          'Post deleted!',
-          'Your post has been deleted successfully!',
-        );
-        // setDeleted(true);
-      })
-      .catch((e) => console.log('Error deleting post.', e));
-  };
+    return firestore()
+        .collection('products')
+        .doc(postId)
+        .delete()
+        .then(() => {
+            Alert.alert(
+                'Product deleted!',
+                'Your Product has been deleted successfully!',
+            );
+            // setDeleted(true);
+        })
+        .catch((e) => console.log('Error deleting Product.', e));
+};
 
 
 const Product = {
     addProduct,
     getProduct,
-    deleteProduct
+    updateProduct,
+    deleteProduct,
 }
 export default Product;
 

@@ -1,4 +1,4 @@
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native'
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, ImageBackground, Image } from 'react-native'
 import React, { useState } from 'react'
 import Auth from '../Store/auth';
 const Login = (props) => {
@@ -10,7 +10,8 @@ const Login = (props) => {
   return (
     <ImageBackground style={styles.container}
       source={require('../Icons/bg1.jpg')}>
-      <Text style={{ fontSize: 24, color: "#0000FF", marginBottom: 20 }}>Login</Text>
+        <Image source={require('../Icons/profile1.png')}  style={{width:90,height:90}} />
+      <Text style={{ fontSize: 24, color: "#0000FF", marginBottom: 20 }}>SignIn</Text>
 
 
 
@@ -46,7 +47,7 @@ const Login = (props) => {
       onPress={() => {
         props.navigation.navigate('Registration')
       }}>
-        <Text>New User?</Text>
+        <Text style={{fontSize:15,marginTop:10,color:"blue"}}>New User? Sign Up</Text>
       </TouchableOpacity>
     </ImageBackground>
   )
