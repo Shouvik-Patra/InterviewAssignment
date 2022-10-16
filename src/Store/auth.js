@@ -36,22 +36,21 @@ const signUp = (name, email, password) => {
             err => Alert.alert(err.code, err.message)
         )
 }
+
+
 const signIn = (email, password) => {
-    if (!email || !password) {
-        Alert.alert('Error', 'Enter Correct Email/Password!!!')
-    }
-    return auth().createUserWithEmailAndPassword(email, password)
-        .then(() => { })
-        .catch(err => Alert.alert(err.code, err.message))
-}
-
-const forgetPassword = (email) => {
-    if (!email) {
-        Alert.alert('Error', 'Please enter email')
+    if(!email || !password){
+        Alert.alert('Error', 'Please enter all fields')
     }
 
-    return auth().sendPasswordResetEmail(email)
+    return auth().signInWithEmailAndPassword(email, password)
+    .then(() => {'Welcome','Login Successull!!'})
+    .catch(
+        err => Alert.alert(err.code, err.message)
+    )
 }
+
+
 
 const signOut = () => {
     return auth().signOut()
@@ -60,7 +59,6 @@ const signOut = () => {
 const Auth = {
     signUp,
     signIn,
-    forgetPassword,
     signOut,
 }
 

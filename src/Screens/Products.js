@@ -28,6 +28,7 @@ const Products = () => {
     return (
 
         <SafeAreaView style={styles.container}>
+            <Text>Product List</Text>
             <FlatList
                 data={products}
                 renderItem={({ item }) => (
@@ -37,9 +38,9 @@ const Products = () => {
                         <Image style={styles.card2} source={require('../Icons/unnamed.png')}></Image>
 
 
-                        <Text>Product Name: {item.productName}</Text>
-                        <Text> Price:{item.price}</Text>
-                        <Text>Offer Price {item.offerPrice}</Text>
+                        <Text style={{fontSize:18,color:"#A52A2A",fontWeight:'900'}}> {item.productName}</Text>
+                        <Text style={{fontSize:16,color:"black",fontWeight:'900'}}> Price:{item.price}</Text>
+                        <Text style={{fontSize:16,color:"#A52A2A",fontWeight:'900'}}>Offer Price {item.offerPrice}</Text>
 
                         <View style={styles.sub}>
                             <TouchableOpacity
@@ -96,7 +97,8 @@ const styles = StyleSheet.create({
         borderColor: "#808080",
         borderRadius: 5,
         marginLeft: 5,
-        marginRight: 5
+        marginRight: 5,
+        marginTop:5
     },
     card2: {
         width: 250,
